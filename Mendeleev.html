@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="UTF-8">
+<title>Периодтық кесте — 118 элемент</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #eef2f5;
+        margin: 0;
+        padding: 20px;
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 20px;
+        animation: fadeIn 0.8s ease;
+    }
+
+    .table {
+        display: grid;
+        grid-template-columns: repeat(18, 65px);
+        gap: 5px;
+        justify-content: center;
+        animation: fadeIn 1.5s ease;
+    }
+
+    .element {
+        background: white;
+        border-radius: 6px;
+        padding: 5px;
+        border: 1px solid #ccc;
+        text-align: center;
+        cursor: pointer;
+        transition: 0.25s;
+        animation: pop 0.4s ease;
+    }
+
+    .element:hover {
+        transform: translateY(-4px) scale(1.06);
+        box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+        background: #e6f0ff;
+    }
+
+    .num { font-size: 10px; opacity: 0.65; }
+    .symbol { font-size: 20px; font-weight: bold; }
+    .name { font-size: 9px; opacity: 0.8; }
+
+    /* Топ түстері */
+    .alkali { background:#ffdcdc; }
+    .alkaline { background:#ffe8c6; }
+    .transition { background:#e9ffe4; }
+    .post { background:#f6e3ff; }
+    .metalloid { background:#fff7c7; }
+    .nonmetal { background:#e0f2ff; }
+    .halogen { background:#ffe0ef; }
+    .noble { background:#e6e6ff; }
+    .lanth { background:#ffe4b2; }
+    .actin { background:#ffd2c3; }
+
+    #infoBox {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0.7);
+        background: #fff;
+        width: 310px;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 0 18px rgba(0,0,0,0.4);
+        display: none;
+        animation: showBox 0.3s forwards;
+        z-index: 900;
+    }
+
+    #closeBtn {
+        float: right;
+        background: #ff5c5c;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(12px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pop {
+        from { opacity:0; transform:scale(0.65); }
+        to   { opacity:1; transform:scale(1); }
+    }
+
+    @keyframes showBox {
+        to { transform: translate(-50%, -50%) scale(1); }
+    }
+
+    @media(max-width:900px){
+        .table { grid-template-columns: repeat(18, 40px); }
+        .symbol { font-size: 14px; }
+        .name { font-size: 7px; }
+        .num { font-size: 8px; }
+    }
+
+    @media(max-width:500px){
+        .table {
+            transform: scale(0.8);
+            transform-origin: top center;
+        }
+    }
+
+</style>
+</head>
+
+<body>
+
+<h1>Периодтық кесте (118 элемент)</h1>
+
+<div class="table" id="periodicTable"></div>
+
+<div id="infoBox">
+    <button id="closeBtn">Жабу</button>
+    <h2 id="elName"></h2>
+    <p><b>Таңба:</b> <span id="elSymbol"></span></p>
+    <p><b>Нөмірі:</b>  <span id="elNumber"></span></p>
+    <p><b>Массасы:</b>  <span id="elMass"></span></p>
+</div>
+
+<script>
+
+/* ===================================================
+   118 элементтің толық тізімі (қазақша)
+=================================================== */
+
+const elements = [
+
+/* -------- 1-ПЕРИОД -------- */
+{num:1, symbol:"H", name:"Сутегі", mass:"1.008", col:1, row:1, class:"nonmetal"},
+{num:2, symbol:"He", name:"Гелий", mass:"4.0026", col:18, row:1, class:"noble"},
+
+/* -------- 2-ПЕРИОД -------- */
+{num:3, symbol:"Li", name:"Литий", mass:"6.94", col:1, row:2, class:"alkali"},
+{num:4, symbol:"Be", name:"Бериллий", mass:"9.0122", col:2, row:2, class:"alkaline"},
+{num:5, symbol:"B", name:"Бор", mass:"10.81", col:13, row:2, class:"metalloid"},
+{num:6, symbol:"C", name:"Көміртек", mass:"12.011", col:14, row:2, class:"nonmetal"},
+{num:7, symbol:"N", name:"Азот", mass:"14.007", col:15, row:2, class:"nonmetal"},
+{num:8, symbol:"O", name:"Оттегі", mass:"15.999", col:16, row:2, class:"nonmetal"},
+{num:9, symbol:"F", name:"Фтор", mass:"18.998", col:17, row:2, class:"halogen"},
+{num:10, symbol:"Ne", name:"Неон", mass:"20.180", col:18, row:2, class:"noble"},
+
+/* -------- 3-ПЕРИОД -------- */
+{num:11, symbol:"Na", name:"Натрий", mass:"22.990", col:1, row:3, class:"alkali"},
+{num:12, symbol:"Mg", name:"Магний", mass:"24.305", col:2, row:3, class:"alkaline"},
+{num:13, symbol:"Al", name:"Алюминий", mass:"26.982", col:13, row:3, class:"post"},
+{num:14, symbol:"Si", name:"Кремний", mass:"28.085", col:14, row:3, class:"metalloid"},
+{num:15, symbol:"P", name:"Фосфор", mass:"30.974", col:15, row:3, class:"nonmetal"},
+{num:16, symbol:"S", name:"Күкірт", mass:"32.06", col:16, row:3, class:"nonmetal"},
+{num:17, symbol:"Cl", name:"Хлор", mass:"35.45", col:17, row:3, class:"halogen"},
+{num:18, symbol:"Ar", name:"Аргон", mass:"39.948", col:18, row:3, class:"noble"},
+
+/* -------- 4-ПЕРИОД -------- */
+{num:19, symbol:"K", name:"Калий", mass:"39.098", col:1, row:4, class:"alkali"},
+{num:20, symbol:"Ca", name:"Кальций", mass:"40.078", col:2, row:4, class:"alkaline"},
+{num:21, symbol:"Sc", name:"Скандий", mass:"44.956", col:3, row:4, class:"transition"},
+{num:22, symbol:"Ti", name:"Титан", mass:"47.867", col:4, row:4, class:"transition"},
+{num:23, symbol:"V", name:"Ванадий", mass:"50.942", col:5, row:4, class:"transition"},
+{num:24, symbol:"Cr", name:"Хром", mass:"51.996", col:6, row:4, class:"transition"},
+{num:25, symbol:"Mn", name:"Марганец", mass:"54.938", col:7, row:4, class:"transition"},
+{num:26, symbol:"Fe", name:"Темір", mass:"55.845", col:8, row:4, class:"transition"},
+{num:27, symbol:"Co", name:"Кобальт", mass:"58.933", col:9, row:4, class:"transition"},
+{num:28, symbol:"Ni", name:"Никель", mass:"58.693", col:10, row:4, class:"transition"},
+{num:29, symbol:"Cu", name:"Мыс", mass:"63.546", col:11, row:4, class:"transition"},
+{num:30, symbol:"Zn", name:"Мырыш", mass:"65.38", col:12, row:4, class:"transition"},
+{num:31, symbol:"Ga", name:"Галлий", mass:"69.723", col:13, row:4, class:"post"},
+{num:32, symbol:"Ge", name:"Германий", mass:"72.630", col:14, row:4, class:"metalloid"},
+{num:33, symbol:"As", name:"Мышьяк", mass:"74.922", col:15, row:4, class:"metalloid"},
+{num:34, symbol:"Se", name:"Селен", mass:"78.971", col:16, row:4, class:"nonmetal"},
+{num:35, symbol:"Br", name:"Бром", mass:"79.904", col:17, row:4, class:"halogen"},
+{num:36, symbol:"Kr", name:"Криптон", mass:"83.798", col:18, row:4, class:"noble"},
+
+/* -------- 5-ПЕРИОД -------- */
+{num:37, symbol:"Rb", class:"alkali", name:"Рубидий", mass:"85.468", col:1, row:5},
+{num:38, symbol:"Sr", class:"alkaline", name:"Стронций", mass:"87.62", col:2, row:5},
+{num:39, symbol:"Y", class:"transition", name:"Иттрий", mass:"88.906", col:3, row:5},
+{num:40, symbol:"Zr", class:"transition", name:"Цирконий", mass:"91.224", col:4, row:5},
+{num:41, symbol:"Nb", class:"transition", name:"Ниобий", mass:"92.906", col:5, row:5},
+{num:42, symbol:"Mo", class:"transition", name:"Молибден", mass:"95.95", col:6, row:5},
+{num:43, symbol:"Tc", class:"transition", name:"Технеций", mass:"98", col:7, row:5},
+{num:44, symbol:"Ru", class:"transition", name:"Рутений", mass:"101.07", col:8, row:5},
+{num:45, symbol:"Rh", class:"transition", name:"Родий", mass:"102.91", col:9, row:5},
+{num:46, symbol:"Pd", class:"transition", name:"Палладий", mass:"106.42", col:10, row:5},
+{num:47, symbol:"Ag", class:"transition", name:"Күміс", mass:"107.87", col:11, row:5},
+{num:48, symbol:"Cd", class:"transition", name:"Кадмий", mass:"112.41", col:12, row:5},
+{num:49, symbol:"In", class:"post", name:"Индий", mass:"114.82", col:13, row:5},
+{num:50, symbol:"Sn", class:"post", name:"Қалайы", mass:"118.71", col:14, row:5},
+{num:51, symbol:"Sb", class:"metalloid", name:"Сурьма", mass:"121.76", col:15, row:5},
+{num:52, symbol:"Te", class:"metalloid", name:"Теллур", mass:"127.60", col:16, row:5},
+{num:53, symbol:"I", class:"halogen", name:"Йод", mass:"126.90", col:17, row:5},
+{num:54, symbol:"Xe", class:"noble", name:"Ксенон", mass:"131.29", col:18, row:5},
+
+/* -------- 6-ПЕРИОД -------- */
+{num:55, symbol:"Cs", class:"alkali", name:"Цезий", mass:"132.91", col:1, row:6},
+{num:56, symbol:"Ba", class:"alkaline", name:"Барий", mass:"137.33", col:2, row:6},
+
+/* -------- ЛАНТАНОИДТЕР -------- */
+{num:57, symbol:"La", class:"lanth", name:"Лантан", mass:"138.91", col:3, row:9},
+{num:58, symbol:"Ce", class:"lanth", name:"Церий", mass:"140.12", col:4, row:9},
+{num:59, symbol:"Pr", class:"lanth", name:"Празеодим", mass:"140.91", col:5, row:9},
+{num:60, symbol:"Nd", class:"lanth", name:"Неодим", mass:"144.24", col:6, row:9},
+{num:61, symbol:"Pm", class:"lanth", name:"Прометий", mass:"145", col:7, row:9},
+{num:62, symbol:"Sm", class:"lanth", name:"Самарий", mass:"150.36", col:8, row:9},
+{num:63, symbol:"Eu", class:"lanth", name:"Европий", mass:"151.96", col:9, row:9},
+{num:64, symbol:"Gd", class:"lanth", name:"Гадолиний", mass:"157.25", col:10, row:9},
+{num:65, symbol:"Tb", class:"lanth", name:"Тербий", mass:"158.93", col:11, row:9},
+{num:66, symbol:"Dy", class:"lanth", name:"Диспрозий", mass:"162.50", col:12, row:9},
+{num:67, symbol:"Ho", class:"lanth", name:"Гольмий", mass:"164.93", col:13, row:9},
+{num:68, symbol:"Er", class:"lanth", name:"Эрбий", mass:"167.26", col:14, row:9},
+{num:69, symbol:"Tm", class:"lanth", name:"Тулий", mass:"168.93", col:15, row:9},
+{num:70, symbol:"Yb", class:"lanth", name:"Иттербий", mass:"173.04", col:16, row:9},
+{num:71, symbol:"Lu", class:"lanth", name:"Лютеций", mass:"174.97", col:17, row:9},
+
+/* -------- 6-ПЕРИОД (жалғасы) -------- */
+{num:72, symbol:"Hf", class:"transition", name:"Гафний", mass:"178.49", col:4, row:6},
+{num:73, symbol:"Ta", class:"transition", name:"Тантал", mass:"180.95", col:5, row:6},
+{num:74, symbol:"W", class:"transition", name:"Вольфрам", mass:"183.84", col:6, row:6},
+{num:75, symbol:"Re", class:"transition", name:"Рений", mass:"186.21", col:7, row:6},
+{num:76, symbol:"Os", class:"transition", name:"Осмий", mass:"190.23", col:8, row:6},
+{num:77, symbol:"Ir", class:"transition", name:"Иридий", mass:"192.22", col:9, row:6},
+{num:78, symbol:"Pt", class:"transition", name:"Платина", mass:"195.08", col:10, row:6},
+{num:79, symbol:"Au", class:"transition", name:"Алтын", mass:"196.97", col:11, row:6},
+{num:80, symbol:"Hg", class:"transition", name:"Сынап", mass:"200.59", col:12, row:6},
+{num:81, symbol:"Tl", class:"post", name:"Таллий", mass:"204.38", col:13, row:6},
+{num:82, symbol:"Pb", class:"post", name:"Қорғасын", mass:"207.2", col:14, row:6},
+{num:83, symbol:"Bi", class:"post", name:"Висмут", mass:"208.98", col:15, row:6},
+{num:84, symbol:"Po", class:"metalloid", name:"Полоний", mass:"209", col:16, row:6},
+{num:85, symbol:"At", class:"halogen", name:"Астат", mass:"210", col:17, row:6},
+{num:86, symbol:"Rn", class:"noble", name:"Радон", mass:"222", col:18, row:6},
+
+/* -------- 7-ПЕРИОД -------- */
+{num:87, symbol:"Fr", class:"alkali", name:"Франций", mass:"223", col:1, row:7},
+{num:88, symbol:"Ra", class:"alkaline", name:"Радий", mass:"226", col:2, row:7},
+
+/* -------- АКТИНОИДТЕР -------- */
+{num:89, symbol:"Ac", class:"actin", name:"Актиний", mass:"227", col:3, row:10},
+{num:90, symbol:"Th", class:"actin", name:"Торий", mass:"232.04", col:4, row:10},
+{num:91, symbol:"Pa", class:"actin", name:"Протактиний", mass:"231.04", col:5, row:10},
+{num:92, symbol:"U", class:"actin", name:"Уран", mass:"238.03", col:6, row:10},
+{num:93, symbol:"Np", class:"actin", name:"Нептуний", mass:"237", col:7, row:10},
+{num:94, symbol:"Pu", class:"actin", name:"Плутоний", mass:"244", col:8, row:10},
+{num:95, symbol:"Am", class:"actin", name:"Америций", mass:"243", col:9, row:10},
+{num:96, symbol:"Cm", class:"actin", name:"Кюрий", mass:"247", col:10, row:10},
+{num:97, symbol:"Bk", class:"actin", name:"Берклий", mass:"247", col:11, row:10},
+{num:98, symbol:"Cf", class:"actin", name:"Калифорний", mass:"251", col:12, row:10},
+{num:99, symbol:"Es", class:"actin", name:"Эйнштейний", mass:"252", col:13, row:10},
+{num:100, symbol:"Fm", class:"actin", name:"Фермий", mass:"257", col:14, row:10},
+{num:101, symbol:"Md", class:"actin", name:"Менделевий", mass:"258", col:15, row:10},
+{num:102, symbol:"No", class:"actin", name:"Нобелий", mass:"259", col:16, row:10},
+{num:103, symbol:"Lr", class:"actin", name:"Лоуренсий", mass:"262", col:17, row:10},
+
+/* -------- 7-ПЕРИОД (жалғасы) -------- */
+{num:104, symbol:"Rf", class:"transition", name:"Резерфордий", mass:"267", col:4, row:7},
+{num:105, symbol:"Db", class:"transition", name:"Дубний", mass:"268", col:5, row:7},
+{num:106, symbol:"Sg", class:"transition", name:"Сиборгий", mass:"269", col:6, row:7},
+{num:107, symbol:"Bh", class:"transition", name:"Борий", mass:"270", col:7, row:7},
+{num:108, symbol:"Hs", class:"transition", name:"Хассий", mass:"277", col:8, row:7},
+{num:109, symbol:"Mt", class:"transition", name:"Мейтнерий", mass:"278", col:9, row:7},
+{num:110, symbol:"Ds", class:"transition", name:"Дармштадтий", mass:"281", col:10, row:7},
+{num:111, symbol:"Rg", class:"transition", name:"Рентгений", mass:"282", col:11, row:7},
+{num:112, symbol:"Cn", class:"transition", name:"Коперниций", mass:"285", col:12, row:7},
+{num:113, symbol:"Nh", class:"post", name:"Нихоний", mass:"286", col:13, row:7},
+{num:114, symbol:"Fl", class:"post", name:"Флеровий", mass:"289", col:14, row:7},
+{num:115, symbol:"Mc", class:"post", name:"Московий", mass:"290", col:15, row:7},
+{num:116, symbol:"Lv", class:"post", name:"Ливерморий", mass:"293", col:16, row:7},
+{num:117, symbol:"Ts", class:"halogen", name:"Теннессин", mass:"294", col:17, row:7},
+{num:118, symbol:"Og", class:"noble", name:"Оганесон", mass:"294", col:18, row:7},
+
+];
+
+/* --- Кестені көрсету --- */
+const table = document.getElementById("periodicTable");
+elements.forEach(el => {
+    const d = document.createElement("div");
+    d.className = "element " + el.class;
+    d.style.gridColumn = el.col;
+    d.style.gridRow = el.row;
+
+    d.innerHTML = `
+        <div class="num">${el.num}</div>
+        <div class="symbol">${el.symbol}</div>
+        <div class="name">${el.name}</div>
+    `;
+
+    d.onclick = () => showInfo(el);
+    table.appendChild(d);
+});
+
+/* --- Ақпарат терезесі --- */
+function showInfo(el) {
+    document.getElementById("elName").innerText = el.name;
+    document.getElementById("elSymbol").innerText = el.symbol;
+    document.getElementById("elNumber").innerText = el.num;
+    document.getElementById("elMass").innerText = el.mass;
+
+    document.getElementById("infoBox").style.display = "block";
+}
+
+document.getElementById("closeBtn").onclick = () =>
+    document.getElementById("infoBox").style.display = "none";
+
+</script>
+</body>
+</html>
